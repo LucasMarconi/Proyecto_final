@@ -1,0 +1,21 @@
+{% extends 'App1/base.html' %} {% load static %} {% block title %} Editar
+{%endblock title %} {% block main %}
+<header class="masthead text-center text-white">
+  <div class="masthead-content">
+    <div class="container px-5">
+      <h1 class="masthead-heading mb-0">Editar</h1>
+      <h2 class="masthead-subheading mb-0">Un Cliente</h2>
+    </div>
+  </div>
+  <div class="bg-circle-1 bg-circle"></div>
+  <div class="bg-circle-2 bg-circle"></div>
+  <div class="bg-circle-3 bg-circle"></div>
+  <div class="bg-circle-4 bg-circle"></div>
+</header>
+
+<form method="POST">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Actualizar" />
+</form>
+
+{% endblock main %}
