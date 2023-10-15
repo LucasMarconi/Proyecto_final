@@ -51,23 +51,6 @@ def sucursalesFormulario(request):
             miFormulario = SucursalFormulario()
  
     return render(request, "App1/SucursalFormulario.html", {"miFormulario": miFormulario})
-   
-def clienteFormulario(request):
- 
-      if request.method == 'POST':
- 
-            miFormulario = ClienteFormulario(request.POST ) 
-            print(miFormulario)
- 
-            if miFormulario.is_valid():
-                  informacion = miFormulario.cleaned_data
-                  cliente = Cliente(nombre=informacion['nombre'], email=informacion['email'],   edad=informacion['edad'])
-                  cliente.save()
-                  return inicio(request)
-      else:
-            miFormulario = ClienteFormulario()
- 
-      return render(request, "App1/clienteFormulario.html", {"miFormulario": miFormulario}) 
 
 def buscarCli(request):
     
@@ -102,10 +85,6 @@ class ClienteListView(ListView):
     model=Cliente
     template_name= "App1/cliLista.html"
     
-class ProdDetalleView(LoginRequiredMixin, DetailView):
-    model=Producto
-    template_name= "App1/Prod_detalle.html"
-    
 class  ClienteCreateView(LoginRequiredMixin, CreateView):
     model=Cliente
     template_name= "App1/clienteFormulario.html"
@@ -118,9 +97,8 @@ class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("ListCli")
     fields = ["nombre", "email", "edad"]
 
-class ProdDeleteView(LoginRequiredMixin, DeleteView):
+class ProdDetalleView(DetailView):
     model=Producto
-    success_url = reverse_lazy("BorrarProd")
-    template_name= "App1/base.html"
+    template_name= "App1/Prod_detalle.html"
 
 
