@@ -14,15 +14,19 @@
   <div class="bg-circle-4 bg-circle"></div>
 </header>
 
-{% if cliente in clientes%} {% for cliente in objet_list %}
+{% if clientes %} {% for cliente in clientes %}
+
+<h3>Clientes encontrados: {{clientes|length}}</h3>
 
 <div class="container px-5">
   <div class="row gx-5 align-items-center">
     <div class="col-lg-6 order-lg-2">
       <div class="p-5">
-        <p>Nombre: {{ cliente.nombre }}</p>
-        <p>Email: {{ cliente.email }}</p>
-        <p>Edad: {{ cliente.edad }}</p>
+        <ul>
+          <li>Nombre: {{ cliente.nombre }}</li>
+          <li>Email: {{ cliente.email }}</li>
+          <li>Edad: {{ cliente.edad }}</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -32,7 +36,7 @@
   <div class="row gx-5 align-items-center">
     <div class="col-lg-6 order-lg-2">
       <div class="p-5">
-        <p>No se encontro el cliente {{cliente.nombre}}</p>
+        <p>No hubo resultados</p>
       </div>
     </div>
   </div>

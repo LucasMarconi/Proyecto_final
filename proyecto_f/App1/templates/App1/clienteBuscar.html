@@ -1,10 +1,10 @@
 {% extends 'App1/base.html' %} {% load static %} {% block title %} Formulario -
-Agregar Cliente {%endblock title %} {% block main %}
+Buscar Cliente {%endblock title %} {% block main %}
 
 <header class="masthead text-center text-white">
   <div class="masthead-content">
     <div class="container px-5">
-      <h1 class="masthead-heading mb-0">Agregar</h1>
+      <h1 class="masthead-heading mb-0">Buscar</h1>
       <h2 class="masthead-subheading mb-0">Un Cliente</h2>
     </div>
   </div>
@@ -16,10 +16,12 @@ Agregar Cliente {%endblock title %} {% block main %}
 
 <form method="POST">
   {% csrf_token %}
-  <div><p>Nombre: {{ form.nombre }}</p></div>
-  <div><p>Email: {{ form.email }}</p></div>
-  <div><p>Edad: {{ form.edad }}</p></div>
+  <div>
+    <table>
+      {{ miFormulario.as_table }}
+    </table>
+  </div>
 
-  <input type="submit" value="Agregar" />
+  <input type="submit" value="Buscar" />
 </form>
 {% endblock main %}

@@ -1,6 +1,4 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
 class ClienteFormulario(forms.Form):
     
@@ -19,7 +17,6 @@ class SucursalFormulario(forms.Form):
     altura = forms.IntegerField()
     
 class BusquedaCliente(forms.Form):
-    
     nombre = forms.CharField()
     
     

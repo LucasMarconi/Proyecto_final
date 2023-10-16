@@ -57,18 +57,15 @@ def buscarCli(request):
     if request.method == 'POST':
          
             miFormulario = BusquedaCliente(request.POST ) 
-            print(miFormulario)
  
             if miFormulario.is_valid():
                 informacion = miFormulario.cleaned_data
                 clientes = Cliente.objects.filter(nombre__icontains=informacion["nombre"])
-                return render(request, "App1/listacli.html", {"clientes": clientes})
-            else:
-                print("\n\nERROR IS_VALID FALSE\n\n")
+                return render(request, "App1/cliResultado.html", {"clientes": clientes})
     else:
         miFormulario = BusquedaCliente()
  
-    return render(request, "App1/clienteFormulario.html", {"miFormulario": miFormulario})
+    return render(request, "App1/clienteBuscar.html", {"miFormulario": miFormulario})
 
 @login_required
 def borrarproducto(request, prod_id):
