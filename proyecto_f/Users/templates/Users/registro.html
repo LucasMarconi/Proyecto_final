@@ -3,8 +3,7 @@
 <header class="masthead text-center text-white">
   <div class="masthead-content">
     <div class="container px-5">
-      <h1 class="masthead-heading mb-0">Iniciar</h1>
-      <h2 class="masthead-subheading mb-0">Sesion</h2>
+      <h1 class="masthead-heading mb-0">Registrarse</h1>
     </div>
   </div>
   <div class="bg-circle-1 bg-circle"></div>
@@ -12,20 +11,25 @@
   <div class="bg-circle-3 bg-circle"></div>
   <div class="bg-circle-4 bg-circle"></div>
 </header>
+<br />
+<br />
 <div display="flex">
   <div margin="auto">
-    <div class="container text-center">
+    <div
+      class="container text-center"
+      display="flex"
+      style="width: 300px; height: 100px"
+    >
       <form action="" method="POST">
         <div class="card" style="width: 18rem">
           <div class="card-body">{% csrf_token %} {{ form.as_p }}</div>
-          <button type="submit">Registrate!</button>
+          <button type="submit">Crear Usuario</button>
         </div>
       </form>
+      <br />
+      <h4>{{msg_register}}</h4>
     </div>
   </div>
-</div>
-<div class="container text-center">
-  <h4>{{mensaje}}</h4>
 </div>
 
 {% endblock main %}

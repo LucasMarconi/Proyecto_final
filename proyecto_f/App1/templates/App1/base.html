@@ -55,6 +55,20 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'Sucursales' %}">Sucursales</a>
             </li>
+            {% if request.user.is_authenticated %}
+            {% if avatar %}
+            <img src="{{avatar}}" alt="" style="height: 40px;width: 40px;" class="img-fluid rounded-circle">
+            {% endif %}
+                   <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ request.user.username }}
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{% url 'Edit' %}">Editar cuenta</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar sesión</a></li>
+                      </ul>
+                  </div>
+              {% endif %}
           </ul>
         </div>
       </div>
@@ -64,8 +78,8 @@
     <header class="masthead text-center text-white">
       <div class="masthead-content">
         <div class="container px-5">
-          <h1 class="masthead-heading mb-0">Bienvenido</h1>
-          <h2 class="masthead-subheading mb-0">Al proyecto 2</h2>
+          <h1 class="masthead-heading mb-0">Bienvenido!</h1>
+          <h2 class="masthead-subheading mb-0"></h2>
           <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll"
             >Leer más</a
           >
@@ -93,15 +107,25 @@
             <div class="p-5">
               <h2 class="display-2">Clientes</h2>
               {% if request.user.is_authenticated %}
-                <h3>Bienvenido {{request.user.username}} 
+                <h3>Bienvenido {{request.user.username}}</h3>
               {% else %}
                 <p>
                 Para formar parte de nuestros clientes solamente tenes que
-                iniciar sesion!
+                registrarte!
+                <p><a
+                  class="btn btn-primary rounded-pill mt-1"
+                  href="{% url 'Register' %}"
+                  >Registrarse</a>
+                </p>
+                </p>
+                <br>
+                <br>
+                <p>
+                Si ya tenes una cuenta solamente tenes que iniciar sesion haciendo click en el boton de abajo!
                 <p><a
                   class="btn btn-primary rounded-pill mt-1"
                   href="{% url 'Login' %}"
-                  >Inciar Sesion</a>
+                  >Iniciar sesion</a>
                 </p>
                 </p>
               {% endif %}
@@ -128,14 +152,22 @@
           <div class="col-lg-6">
             <div class="p-5">
               <h2 class="display-2">Productos registrados</h2>
-              <ul>
+              {% if productos %}
+                <ul>
                 {% for prod in productos%}
                 <li>
                   Nombre: {{ prod.nombre }} | Precio: {{ prod.precio }}
-                  <a href="{% url 'BorrarProd' prod.id %}" class="btn btn-primary rounded-pill mt-1"> Eliminar </a>
+                  {% if request.user.is_superuser == 1 %}
+                  <a href="{% url 'BorrarProd' prod.id %}" class="btn btn-primary rounded-pill"> Eliminar </a>
                 </li>
+                {% else %}
+                <br>
+                {% endif %}
                 {% endfor %}
               </ul>
+              {% else %}
+              <p> No hay stock de produtos por ahora. Vuelva pronto! </p>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -171,7 +203,7 @@
     <footer class="py-5 bg-black">
       <div class="container px-5">
         <p class="m-0 text-center text-white small">
-          Copyright &copy; Your Website 2023
+          Copyright &copy; Lucas Marconi 2023
         </p>
       </div>
     </footer>

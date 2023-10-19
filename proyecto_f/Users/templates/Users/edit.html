@@ -1,0 +1,44 @@
+{% extends 'App1/base.html' %} {% load static %} {% block title %} Edit
+{%endblock title %} {% block main %}
+<header class="masthead text-center text-white">
+  <div class="masthead-content">
+    <div class="container px-5">
+      <h1 class="masthead-heading mb-0">Editar</h1>
+      <h2 class="masthead-subheading mb-0">informacion</h2>
+    </div>
+  </div>
+  <div class="bg-circle-1 bg-circle"></div>
+  <div class="bg-circle-2 bg-circle"></div>
+  <div class="bg-circle-3 bg-circle"></div>
+  <div class="bg-circle-4 bg-circle"></div>
+</header>
+<br />
+<br />
+<div display="flex">
+  <div margin="auto">
+    <div
+      class="container text-center"
+      display="flex"
+      style="width: 530px; height: 100px"
+    >
+    <h1>Formulario - Editar Perfil</h1>
+    <h1>De {{usuario}}</h1>
+    <div class="card" style="width: 32rem">
+        <div class="card-body">
+        <form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <table>
+    {{ miFormulario.as_table }}
+  </table>
+  </div>
+  <input type="submit" , value="Guardar" />
+</div>
+</form>
+</div>
+</div>
+</div>
+<br />
+<br />
+
+{% endblock main %}

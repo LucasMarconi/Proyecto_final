@@ -5,24 +5,28 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from Users.models import Imagen
 
 
 def inicio(request):
     suc = Sucursal.objects.all()
     prod = Producto.objects.all()
-    return render(request, "App1/base.html", {"sucursales": suc, "productos": prod})
+    
+    try:
+        url = Imagen.objects.filter(user=request.user.id)[0]
+    except IndexError:
+        url = None
+    
+    return render(request, "App1/base.html", {"sucursales": suc, "productos": prod, "url": url})
 
 @login_required
 def productosFormulario(request):
     
     if request.method == 'POST':
  
-            miFormulario = ProductoFormulario(request.POST ) 
-            print(miFormulario)
+            miFormulario = ProductoFormulario(request.POST )
  
             if miFormulario.is_valid():
                   informacion = miFormulario.cleaned_data
@@ -40,7 +44,6 @@ def sucursalesFormulario(request):
     if request.method == 'POST':
  
             miFormulario = SucursalFormulario(request.POST ) 
-            print(miFormulario)
  
             if miFormulario.is_valid():
                   informacion = miFormulario.cleaned_data
