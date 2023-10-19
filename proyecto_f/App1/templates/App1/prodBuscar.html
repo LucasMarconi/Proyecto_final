@@ -1,11 +1,11 @@
 {% extends 'App1/base.html' %} {% load static %} {% block title %} Formulario -
-Buscar Cliente {%endblock title %} {% block main %}
+Buscar Prod {%endblock title %} {% block main %}
 
 <header class="masthead text-center text-white">
   <div class="masthead-content">
     <div class="container px-5">
       <h1 class="masthead-heading mb-0">Buscar</h1>
-      <h2 class="masthead-subheading mb-0">Un Cliente</h2>
+      <h2 class="masthead-subheading mb-0">Un Producto</h2>
     </div>
   </div>
   <div class="bg-circle-1 bg-circle"></div>
@@ -13,15 +13,28 @@ Buscar Cliente {%endblock title %} {% block main %}
   <div class="bg-circle-3 bg-circle"></div>
   <div class="bg-circle-4 bg-circle"></div>
 </header>
-
-<form method="POST">
+<br>
+<br>
+<div display="flex">
+  <div margin="auto">
+    <div
+      class="container text-center"
+      display="flex"
+      style="width: 350px; height: 100px"
+    >
+    <div class="card" style="width: 20rem">
+        <div class="card-body">
+        <form action="" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
-  <div>
-    <table>
-      {{ miFormulario.as_table }}
-    </table>
-  </div>
 
+  <table>
+    {{ miFormulario.as_table }}
+  </table>
+  </div>
   <input type="submit" value="Buscar" />
+</div>
 </form>
+</div>
+</div>
+</div>
 {% endblock main %}

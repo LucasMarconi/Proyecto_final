@@ -13,27 +13,26 @@ Agregar Producto {%endblock title %} {% block main %}
   <div class="bg-circle-3 bg-circle"></div>
   <div class="bg-circle-4 bg-circle"></div>
 </header>
-
-{% if miFormulario.error%}
-
-<p style="color: red">Estan mal los datos ingresados</p>
-
-{% endif %}
-
-<form action="" method="POST">
-  {% csrf_token %}
-
-  <div class="container px-5">
-    <div class="row gx-5 align-items-center">
-      <div class="col-lg-6 order-lg-2">
-        <div class="p-5">
-          <table>
-            {{ miFormulario.as_table }}
-          </table>
-          <input type="submit" value="Enviar" />
+<br />
+<br />
+<div display="flex">
+  <div margin="auto">
+    <div
+      class="container text-center"
+      display="flex"
+      style="width: 300px; height: 100px"
+    >
+      <form method="POST">
+        <div class="card" style="width: 18rem">
+          <div class="card-body">
+            {% csrf_token %}
+            <div><p>Nombre: {{ form.nombre }}</p></div>
+            <div><p>Precio: {{ form.precio }}</p></div>
+          </div>
+          <input type="submit" value="Agregar" />
         </div>
-      </div>
+      </form>
     </div>
   </div>
-</form>
+</div>
 {% endblock main %}

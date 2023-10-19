@@ -4,7 +4,7 @@
   <div class="masthead-content">
     <div class="container px-5">
       <h1 class="masthead-heading mb-0">Lista</h1>
-      <h2 class="masthead-subheading mb-0">De Clientes</h2>
+      <h2 class="masthead-subheading mb-0">De Productos</h2>
     </div>
   </div>
   <div class="bg-circle-1 bg-circle"></div>
@@ -17,14 +17,14 @@
 <br />
 <div class="container">
   <div class="row">
-    {% for cliente in object_list %}
+    {% for prod in object_list %}
     <div class="card" style="width: 18rem">
       <div class="card-body">
-        <h5 class="card-title">{{ cliente.nombre }}, {{cliente.edad}}</h5>
-        <p class="card-text">Email: {{ cliente.email }}</p>
+        <h5 class="card-title">{{ prod.nombre }}</h5>
+        <p class="card-text">Precio: ${{ prod.precio }}</p>
         {% if request.user.is_superuser == 1 %}
-        <a href="{% url 'EditCli' cliente.id %}" class="btn btn-primary"
-          >Editar</a
+        <a href="{% url 'BorrarProd' prod.id %}" class="btn btn-primary"
+          >Eliminar</a
         >
         {% endif %}
       </div>
@@ -33,11 +33,15 @@
     {% endfor %}
   </div>
 </div>
-{% if request.user.is_superuser == 1 %}
 <div class="flex">
   &emsp; &emsp;
-  <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'NewCli' %}"
+  <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'Buscar' %}"
+    >Buscar</a
+  >
+  &emsp; &emsp;
+  <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'NewProd' %}"
     >Agregar nuevo</a
   >
 </div>
-{% endif %} {% endblock main %}
+
+{% endblock main %}

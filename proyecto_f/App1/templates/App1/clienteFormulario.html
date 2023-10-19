@@ -13,13 +13,27 @@ Agregar Cliente {%endblock title %} {% block main %}
   <div class="bg-circle-3 bg-circle"></div>
   <div class="bg-circle-4 bg-circle"></div>
 </header>
-
-<form method="POST">
-  {% csrf_token %}
-  <div><p>Nombre: {{ form.nombre }}</p></div>
-  <div><p>Email: {{ form.email }}</p></div>
-  <div><p>Edad: {{ form.edad }}</p></div>
-
-  <input type="submit" value="Agregar" />
-</form>
+<br />
+<br />
+<div display="flex">
+  <div margin="auto">
+    <div
+      class="container text-center"
+      display="flex"
+      style="width: 300px; height: 100px"
+    >
+      <form method="POST">
+        <div class="card" style="width: 18rem">
+          <div class="card-body">
+            {% csrf_token %}
+            <div><p>Nombre: {{ form.nombre }}</p></div>
+            <div><p>Email: {{ form.email }}</p></div>
+            <div><p>Edad: {{ form.edad }}</p></div>
+          </div>
+          <input type="submit" value="Agregar" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock main %}

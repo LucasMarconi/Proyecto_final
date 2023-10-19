@@ -50,7 +50,7 @@
               <a class="nav-link" href="{% url 'ListCli' %}">Clientes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'Productos' %}">Productos</a>
+              <a class="nav-link" href="{% url 'ListProd' %}">Productos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'Sucursales' %}">Sucursales</a>
@@ -75,11 +75,30 @@
     </nav>
     {% block main %}
     <!-- Header-->
+    {% if request.user.is_authenticated %}
     <header class="masthead text-center text-white">
       <div class="masthead-content">
         <div class="container px-5">
           <h1 class="masthead-heading mb-0">Bienvenido!</h1>
-          <h2 class="masthead-subheading mb-0"></h2>
+          <h2 class="masthead-subheading mb-0"> {{request.user.username}} </h2>
+          <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll"
+            >Leer más</a
+          >
+        </div>
+      </div>
+      <div class="bg-circle-1 bg-circle"></div>
+      <div class="bg-circle-2 bg-circle"></div>
+      <div class="bg-circle-3 bg-circle"></div>
+      <div class="bg-circle-4 bg-circle"></div>
+    </header>
+    <!-- Content section 1-->
+    <section id="scroll">
+    {% else %}
+    <header class="masthead text-center text-white">
+      <div class="masthead-content">
+        <div class="container px-5">
+          <h1 class="masthead-heading mb-0">Bienvenido!</h1>
+          <h2 class="masthead-subheading mb-0"> {{request.user.username}} </h2>
           <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll"
             >Leer más</a
           >
@@ -105,10 +124,7 @@
           </div>
           <div class="col-lg-6 order-lg-1">
             <div class="p-5">
-              <h2 class="display-2">Clientes</h2>
-              {% if request.user.is_authenticated %}
-                <h3>Bienvenido {{request.user.username}}</h3>
-              {% else %}
+                <h2 class="display-2">Clientes</h2>
                 <p>
                 Para formar parte de nuestros clientes solamente tenes que
                 registrarte!
@@ -151,23 +167,8 @@
           </div>
           <div class="col-lg-6">
             <div class="p-5">
-              <h2 class="display-2">Productos registrados</h2>
-              {% if productos %}
-                <ul>
-                {% for prod in productos%}
-                <li>
-                  Nombre: {{ prod.nombre }} | Precio: {{ prod.precio }}
-                  {% if request.user.is_superuser == 1 %}
-                  <a href="{% url 'BorrarProd' prod.id %}" class="btn btn-primary rounded-pill"> Eliminar </a>
-                </li>
-                {% else %}
-                <br>
-                {% endif %}
-                {% endfor %}
-              </ul>
-              {% else %}
-              <p> No hay stock de produtos por ahora. Vuelva pronto! </p>
-              {% endif %}
+              <h2 class="display-2">¿Que ofrecemos?</h2>
+              <p>Como pequeño emprendimiento nos dedicamos a la vente de productos de kiosco, tales como gaseosas, galletitas, snacks y demas.</p>
             </div>
           </div>
         </div>

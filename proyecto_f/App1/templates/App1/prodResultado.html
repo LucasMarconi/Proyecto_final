@@ -14,18 +14,17 @@
   <div class="bg-circle-4 bg-circle"></div>
 </header>
 
-{% if clientes %} {% for cliente in clientes %}
-
-<h3>Clientes encontrados: {{clientes|length}}</h3>
-
+{% if productos %} {% for prod in productos %}
+<br />
 <div class="container px-5">
   <div class="row gx-5 align-items-center">
     <div class="col-lg-6 order-lg-2">
       <div class="p-5">
+        <h3>Productos encontrados: {{productos|length}}</h3>
+        <br />
         <ul>
-          <li>Nombre: {{ cliente.nombre }}</li>
-          <li>Email: {{ cliente.email }}</li>
-          <li>Edad: {{ cliente.edad }}</li>
+          <li>Nombre: {{ prod.nombre }}</li>
+          <li>Precio: {{ prod.precio }}</li>
         </ul>
       </div>
     </div>

@@ -12,14 +12,13 @@ from Users.models import Imagen
 
 def inicio(request):
     suc = Sucursal.objects.all()
-    prod = Producto.objects.all()
     
     try:
         url = Imagen.objects.filter(user=request.user.id)[0]
     except IndexError:
         url = None
     
-    return render(request, "App1/base.html", {"sucursales": suc, "productos": prod, "url": url})
+    return render(request, "App1/base.html", {"sucursales": suc, "url": url})
 
 @login_required
 def productosFormulario(request):
@@ -55,7 +54,7 @@ def sucursalesFormulario(request):
  
     return render(request, "App1/SucursalFormulario.html", {"miFormulario": miFormulario})
 
-def buscarCli(request):
+def buscarProd(request):
     
     if request.method == 'POST':
          
@@ -63,12 +62,12 @@ def buscarCli(request):
  
             if miFormulario.is_valid():
                 informacion = miFormulario.cleaned_data
-                clientes = Cliente.objects.filter(nombre__icontains=informacion["nombre"])
-                return render(request, "App1/cliResultado.html", {"clientes": clientes})
+                productos = Producto.objects.filter(nombre__icontains=informacion["nombre"])
+                return render(request, "App1/prodResultado.html", {"productos": productos})
     else:
         miFormulario = BusquedaCliente()
  
-    return render(request, "App1/clienteBuscar.html", {"miFormulario": miFormulario})
+    return render(request, "App1/prodBuscar.html", {"miFormulario": miFormulario})
 
 @login_required
 def borrarproducto(request, prod_id):
@@ -96,6 +95,16 @@ class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     template_name= "App1/clienteEdit.html"
     success_url = reverse_lazy("ListCli")
     fields = ["nombre", "email", "edad"]
+
+class ProdListView(ListView):
+    model=Producto
+    template_name= "App1/prodLista.html"
+    
+class  ProdCreateView(LoginRequiredMixin, CreateView):
+    model=Producto
+    template_name= "App1/prodFormulario.html"
+    success_url = reverse_lazy("ListProd")
+    fields=["nombre", "precio"]
 
 class ProdDetalleView(DetailView):
     model=Producto
