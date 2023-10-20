@@ -13,15 +13,22 @@
   <div class="bg-circle-3 bg-circle"></div>
   <div class="bg-circle-4 bg-circle"></div>
 </header>
-
-{% if productos %} {% for prod in productos %}
 <br />
+{% if productos %}
 <div class="container px-5">
   <div class="row gx-5 align-items-center">
     <div class="col-lg-6 order-lg-2">
       <div class="p-5">
         <h3>Productos encontrados: {{productos|length}}</h3>
-        <br />
+      </div>
+    </div>
+  </div>
+</div>
+{% for prod in productos %}
+<div class="container px-5">
+  <div class="row gx-5 align-items-center">
+    <div class="col-lg-6 order-lg-2">
+      <div class="p-5">
         <ul>
           <li>Nombre: {{ prod.nombre }}</li>
           <li>Precio: {{ prod.precio }}</li>

@@ -6,7 +6,7 @@ class Producto(models.Model):
     precio = models.FloatField()
     
     def __str__ (self):
-        return f"{self.nombre} - {self.precio}"
+        return f"{self.nombre} - ${self.precio}"
 
 class Sucursal(models.Model):
     calle = models.CharField(max_length=40)
@@ -21,4 +21,4 @@ class Cliente(models.Model):
     edad = models.IntegerField()
     
     def __str__ (self):
-        return f"{self.nombre} - {self.email}"
+        return f"{self.nombre} - {self.edad} - {self.email}"

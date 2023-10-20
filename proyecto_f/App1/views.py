@@ -3,21 +3,20 @@ from App1.forms import *
 from App1.models import Cliente, Sucursal, Producto
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from Users.models import Imagen
 
 def inicio(request):
-    suc = Sucursal.objects.all()
     
     try:
         url = Imagen.objects.filter(user=request.user.id)[0]
     except IndexError:
         url = None
     
-    return render(request, "App1/base.html", {"sucursales": suc, "url": url})
+    return render(request, "App1/base.html", {"url": url})
 
 @login_required
 def sucursalesFormulario(request):
@@ -51,19 +50,18 @@ def buscarProd(request):
  
     return render(request, "App1/prodBuscar.html", {"miFormulario": miFormulario})
 
-@login_required
 def borrarproducto(request, prod_id):
     
     try:
         producto = Producto.objects.get(id=int(prod_id))
         
         producto.delete()
-        return inicio(request)
+        return render(request, "ListSuc")
     except:
-        return inicio(request)
+        return render(request, "ListSuc")
 
 
-class ClienteListView(ListView):
+class ClienteListView(LoginRequiredMixin, ListView):
     model=Cliente
     template_name= "App1/cliLista.html"
     
@@ -79,7 +77,7 @@ class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("ListCli")
     fields = ["nombre", "email", "edad"]
 
-class ProdListView(ListView):
+class ProdListView(LoginRequiredMixin, ListView):
     model=Producto
     template_name= "App1/prodLista.html"
     
@@ -89,18 +87,23 @@ class  ProdCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("ListProd")
     fields=["nombre", "precio"]
 
+class ProductoDeleteView(DeleteView):
+    model = Producto
+    success_url = reverse_lazy("ListProd")
+    template_name = 'App1/confirmardelete.html'
+
 class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model=Producto
     template_name= "App1/prodEdit.html"
-    success_url = reverse_lazy("Listprod")
+    success_url = reverse_lazy("ListProd")
     fields = ["nombre", "precio"]
 
-class ProdDetalleView(DetailView):
+class ProdDetalleView(LoginRequiredMixin, DetailView):
     
     model=Producto
     template_name= "App1/prodDetalle.html"
 
-class SucListView(ListView):
+class SucListView(LoginRequiredMixin, ListView):
     model=Sucursal
     template_name= "App1/sucLista.html"
     

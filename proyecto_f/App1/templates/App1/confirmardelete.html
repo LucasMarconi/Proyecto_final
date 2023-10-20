@@ -1,10 +1,10 @@
-{% extends 'App1/base.html' %} {% load static %} {% block title %} Editar
+{% extends 'App1/base.html' %} {% load static %} {% block title %} confirmar
 {%endblock title %} {% block main %}
 <header class="masthead text-center text-white">
   <div class="masthead-content">
     <div class="container px-5">
-      <h1 class="masthead-heading mb-0">Editar</h1>
-      <h2 class="masthead-subheading mb-0">Una Sucursal</h2>
+      <h1 class="masthead-heading mb-0">Borrar</h1>
+      <h2 class="masthead-subheading mb-0">{{ object }}</h2>
     </div>
   </div>
   <div class="bg-circle-1 bg-circle"></div>
@@ -21,23 +21,15 @@
       display="flex"
       style="width: 300px; height: 100px"
     >
-      <form action="" method="POST">
+      <form method="POST">
         <div class="card" style="width: 18rem">
-          <div class="card-body">{% csrf_token %} {{ form.as_p }}</div>
-          <input type="submit" value="Actualizar" />
+          <div class="card-body">
+            {% csrf_token %}Estas seguro/a de borrar el producto: {{ object }}
+          </div>
+          <input type="submit" value="Borrar" />
         </div>
       </form>
     </div>
   </div>
-</div>
-<br />
-<br />
-<br />
-<br />
-<div class="flex">
-  &emsp; &emsp;
-  <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'ListSuc' %}"
-    >Regresar</a
-  >
 </div>
 {% endblock main %}
