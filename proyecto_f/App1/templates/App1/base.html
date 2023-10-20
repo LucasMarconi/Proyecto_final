@@ -53,7 +53,7 @@
               <a class="nav-link" href="{% url 'ListProd' %}">Productos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'Sucursales' %}">Sucursales</a>
+              <a class="nav-link" href="{% url 'ListSuc' %}">Sucursales</a>
             </li>
             {% if request.user.is_authenticated %}
             {% if avatar %}
@@ -189,12 +189,16 @@
           </div>
           <div class="col-lg-6 order-lg-1">
             <div class="p-5">
-              <h2 class="display-2">Sucursales registradas</h2>
-              <ul>
-                {% for suc in sucursales%}
-                <li>Calle: {{ suc.calle }} | Altura: {{ suc.altura }}</li>
-                {% endfor %}
-              </ul>
+              <h2 class="display-2">Sucursales</h2>
+              <p>Contamos con varias Sucursales y cada vez abrimos nuevas en distintas localidads de Buenos Aires!</p>
+              <p>
+                Podes ver nuestras Sucursales haciendo click aca abajo!
+                <p><a
+                  class="btn btn-primary rounded-pill mt-1"
+                  href="{% url 'ListSuc' %}"
+                  >Sucursales</a>
+                </p>
+                </p>
             </div>
           </div>
         </div>

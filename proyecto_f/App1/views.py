@@ -3,12 +3,11 @@ from App1.forms import *
 from App1.models import Cliente, Sucursal, Producto
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from Users.models import Imagen
-
 
 def inicio(request):
     suc = Sucursal.objects.all()
@@ -19,23 +18,6 @@ def inicio(request):
         url = None
     
     return render(request, "App1/base.html", {"sucursales": suc, "url": url})
-
-@login_required
-def productosFormulario(request):
-    
-    if request.method == 'POST':
- 
-            miFormulario = ProductoFormulario(request.POST )
- 
-            if miFormulario.is_valid():
-                  informacion = miFormulario.cleaned_data
-                  prod = Producto(nombre=informacion['nombre'], precio=informacion['precio'])
-                  prod.save()
-                  return inicio(request)
-    else:
-            miFormulario = ProductoFormulario()
- 
-    return render(request, "App1/ProductoFormulario.html", {"miFormulario": miFormulario})
 
 @login_required
 def sucursalesFormulario(request):
@@ -80,6 +62,7 @@ def borrarproducto(request, prod_id):
     except:
         return inicio(request)
 
+
 class ClienteListView(ListView):
     model=Cliente
     template_name= "App1/cliLista.html"
@@ -106,8 +89,29 @@ class  ProdCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("ListProd")
     fields=["nombre", "precio"]
 
-class ProdDetalleView(DetailView):
+class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model=Producto
-    template_name= "App1/Prod_detalle.html"
+    template_name= "App1/prodEdit.html"
+    success_url = reverse_lazy("Listprod")
+    fields = ["nombre", "precio"]
 
+class ProdDetalleView(DetailView):
+    
+    model=Producto
+    template_name= "App1/prodDetalle.html"
 
+class SucListView(ListView):
+    model=Sucursal
+    template_name= "App1/sucLista.html"
+    
+class SucCreateView(LoginRequiredMixin, CreateView):
+    model=Sucursal
+    template_name= "App1/sucFormulario.html"
+    success_url = reverse_lazy("ListSuc")
+    fields = ["calle", "altura"]
+    
+class SucUpdateView(LoginRequiredMixin, UpdateView):
+    model=Sucursal
+    template_name= "App1/sucEdit.html"
+    success_url = reverse_lazy("ListSuc")
+    fields = ["calle", "altura"]

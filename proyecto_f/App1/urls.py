@@ -4,7 +4,6 @@ from App1 import views
 
 urlpatterns = [
     path('', views.inicio, name="Inicio"),
-    path('productos/', views.productosFormulario, name="Productos"),
     path('sucursales/', views.sucursalesFormulario, name="Sucursales"),
 ]
 
@@ -23,4 +22,12 @@ urlpatterns += [
     path('borrarprod/<int:prod_id>/', views.borrarproducto, name="BorrarProd"),
     path('detalle/<int:pk>/', views.ProdDetalleView.as_view(), name='DetailProd'),
     path('buscarform/', views.buscarProd, name="Buscar"),
+    path('editarprod/<int:pk>/', views.ProductoUpdateView.as_view(), name='EditProd'),
+]
+
+#Vistas de sucursales
+urlpatterns += [
+    path('listassuc/', views.SucListView.as_view(), name='ListSuc'),
+    path('nuevosuc/', views.SucCreateView.as_view(), name='NewSuc'),
+    path('editarsuc/<int:pk>/', views.SucUpdateView.as_view(), name='EditSuc'),
 ]
