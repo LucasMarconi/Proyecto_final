@@ -1,13 +1,13 @@
-##Proyecto Final Coder House – Python
+# Proyecto Final Coder House – Python
 
 Comisión: 47770
 Alumno: Lucas Martin Marconi
 
-##Nombre del Proyecto
+# Nombre del Proyecto
 
 Pagina de venta de artículos
 
-##Descripción del Proyecto
+# Descripción del Proyecto
 
 Pagina web destinada a usuarios que quieren conocer la tienda
 
@@ -23,10 +23,11 @@ Los usuarios pueden realizar las siguientes acciones:
 - Buscar un producto por su nombre.
 - Ver los detalles del Producto.
 
-  Los SuperUsuarios pueden realizar las siguientes acciones:
+Los SuperUsuarios pueden realizar las siguientes acciones:
 
 - Todo lo anteriormente mencionado.
 - Agregar/Eliminar productos, sucursales y clientes.
 
-##Pruebas Realizadas
+# Pruebas Realizadas
+
 El archivo con las pruebas realizadas llamado "Pruebas Proyecto Python.xlsx" se encuentra en el repositorio.
