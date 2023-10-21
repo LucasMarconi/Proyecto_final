@@ -5,7 +5,6 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from Users.models import Imagen
 
@@ -18,22 +17,8 @@ def inicio(request):
     
     return render(request, "App1/base.html", {"url": url})
 
-@login_required
-def sucursalesFormulario(request):
-    
-    if request.method == 'POST':
- 
-            miFormulario = SucursalFormulario(request.POST ) 
- 
-            if miFormulario.is_valid():
-                  informacion = miFormulario.cleaned_data
-                  suc = Sucursal(calle=informacion['calle'], altura=informacion['altura'])
-                  suc.save()
-                  return inicio(request)
-    else:
-            miFormulario = SucursalFormulario()
- 
-    return render(request, "App1/SucursalFormulario.html", {"miFormulario": miFormulario})
+def aboutme(request):
+    return render(request, "App1/aboutme.html")
 
 def buscarProd(request):
     
@@ -59,7 +44,6 @@ def borrarproducto(request, prod_id):
         return render(request, "ListSuc")
     except:
         return render(request, "ListSuc")
-
 
 class ClienteListView(LoginRequiredMixin, ListView):
     model=Cliente

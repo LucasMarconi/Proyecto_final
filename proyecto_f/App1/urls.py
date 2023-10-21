@@ -4,7 +4,7 @@ from App1 import views
 
 urlpatterns = [
     path('', views.inicio, name="Inicio"),
-    path('sucursales/', views.sucursalesFormulario, name="Sucursales"),
+    path('aboutme/', views.aboutme, name="Aboutme"),
 ]
 
 #Vistas de clientes
@@ -12,7 +12,6 @@ urlpatterns += [
     path('listascli/', views.ClienteListView.as_view(), name='ListCli'),
     path('nuevocli/', views.ClienteCreateView.as_view(), name='NewCli'),
     path('editarcli/<int:pk>/', views.ClienteUpdateView.as_view(), name='EditCli'),
-    #path('eliminarcli/<int:pk>/', views.CliDeleteView.as_view(), name='DeleteCli'),
 ]
 
 #Vistas de productos

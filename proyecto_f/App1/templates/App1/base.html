@@ -55,6 +55,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'ListSuc' %}">Sucursales</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Aboutme' %}">Conocenos</a>
+            </li>
             {% if request.user.is_authenticated %}
             {% if avatar %}
             <img src="{{avatar}}" alt="" style="height: 40px;width: 40px;" class="img-fluid rounded-circle">
